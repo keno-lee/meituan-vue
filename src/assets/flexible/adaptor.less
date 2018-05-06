@@ -1,0 +1,34 @@
+//320 360 375 384 400 414 424 480 540 720 750
+// @media (min-width:320) {
+//     //基准值/设计值 = font-size / 屏幕大小
+//     html {
+//         font-size: @base/750*320px;
+//     }
+// }
+// 网页主色调
+@snColor: #fabc09;
+// 基准值
+@base: 50;
+// 设计图大小
+@designWidth: 750;
+
+.adaptor(@value) {
+    @media (min-width:@value) {
+        //基准值/设计值 = font-size / 屏幕大小
+        html {
+            font-size: @base/@designWidth*@value;
+        }
+    }
+}
+.adaptor(320px);
+.adaptor(360px);
+.adaptor(375px);
+.adaptor(384px);
+.adaptor(400px);
+.adaptor(414px);
+.adaptor(424px);
+.adaptor(480px);
+.adaptor(540px);
+.adaptor(720px);
+.adaptor(750px);
+
