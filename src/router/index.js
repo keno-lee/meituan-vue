@@ -19,7 +19,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/market',
+      path: '/market/:id?',
       component: Market
     },
     {
