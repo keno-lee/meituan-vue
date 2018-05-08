@@ -42,7 +42,7 @@ export default new Vuex.Store({
         totalCount(state){
             var tcount = 0;
             state.mtInfo.forEach(v => {
-                tcount += Number(v.count);
+                tcount += v.count;
             });
             return tcount;
         },

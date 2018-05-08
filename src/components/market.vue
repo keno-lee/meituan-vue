@@ -31,7 +31,7 @@
           <div class="mui-scroll-wrapper">
             <div class="mui-scroll">
                 <ul class="mui-table-view-cms">
-                  <li class="mui-table-view-cell-cms mui-media" v-for="(v, i) in productsById" :key="i">
+                  <li class="mui-table-view-cell-cms mui-media" v-for="(v) in productsById" :key="v.id">
                     
                       <img class="mui-media-object mui-pull-left" :src="v.img">
                       <div class="mui-media-body">
@@ -39,7 +39,7 @@
                           <p>{{v.specifics}}</p>
                           <p>
                             <span class="price">¥ {{v.partner_price}}</span> <span class="oldPrice">¥ {{v.price}}</span>
-                            <numbox class="mui-pull-right" v-model="count" :id="v.id"></numbox>
+                            <numbox class="mui-pull-right" v-model="v.count" :id="v.id"></numbox>
                           </p>
                       </div>
                       
@@ -78,21 +78,34 @@ export default {
   data() {
     return {
       categoryList: [],
-      productList: {},
+      productObj: {},
       productsById: [],
-      count:0,
-      id:0
+      // count:0,
     };
   },
   created() {
     // 一进入页面就渲染sidebar和热销榜
     this.$http.jsonp("http://localhost:3008/list").then(res => {
-      console.log(res);
+      // console.log(res);
       // sidebar
       this.categoryList = res.body.data.categories;
       // 产品
-      this.productList = res.body.data.products;
-      this.productsById = this.productList[104751];
+      for(var k in res.body.data.products){
+        res.body.data.products[k].forEach(v => {
+          
+          var temp = this.$store.getters.getMtInfo.find(e => {
+            return e.id == v.id;
+          })
+          if(temp){
+            v.count = temp.count;
+          }else {
+            v.count = 0;
+          }
+        })
+      }
+      this.productObj = res.body.data.products;
+      this.setItem(res.body.data.products);
+      this.productsById = res.body.data.products[104751];
     });
     // this.count =  this.$store.getters.getCountById(this.id);
   },
@@ -102,6 +115,7 @@ export default {
       scrollY: true, //是否竖向滚动
       scrollX: false //是否横向滚动
     });
+    
   },
   methods: {
     toProList(e) {
@@ -110,16 +124,20 @@ export default {
         v.style.borderLeft = "3px solid #f8f8f8";
       });
       e.target.style.borderLeft = "3px solid #ffd600";
+    },
+    setItem(value){
+      localStorage.setItem("info",JSON.stringify(value));
     }
   },
   watch: {
     $route: {
       handler() {
-        console.log(this.$route.params.id);
-        this.productsById = this.productList[this.$route.params.id];
+        // console.log(this.$route.params.id);
+        this.productsById = this.productObj[this.$route.params.id];
         // console.log(this.productsById);
       },
-      deep: true
+      deep: true,
+      immediate:true
     }
   },
   components: {
@@ -127,7 +145,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .page {
   width: 100%;
   height: 100%;

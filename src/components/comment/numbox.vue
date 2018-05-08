@@ -12,7 +12,7 @@
 export default {
   props: ["value", "id"],
   data() {
-    return {
+    return {  
       num: this.value,
       isShow: false
     };
@@ -34,12 +34,15 @@ export default {
       }
       this.$emit("input", nv);
       // 并且跟新到本地存储中
-      this.$store.commit("saveOneInfo", { "id": this.id, "count": nv });
+      this.$store.commit("saveOneInfo", { "id": this.id, "count": nv ,isChecked:true});
+
     }
   },
   created(){
-    //   先获取
-    // this.num = this.$store.getters.getCountById(this.id);
+    this.num = this.value;
+    if(this.num > 0) {
+      this.isShow = true;
+    }
   }
 };
 </script>
