@@ -1,21 +1,13 @@
-# vue-pro
+## 开始
 
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
+$ # 克隆源代码库并重新初始化 git 仓库
+$ git clone git@github.com:keno-lee/meituan-vue.git
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+$ # 安装依赖
+$ npm install
+
+$ # 项目启动
+$ npm start
+
+```

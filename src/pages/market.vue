@@ -72,7 +72,7 @@
 
 <script>
 import mui from "@/assets/mui/js/mui.min.js";
-import numbox from "@/components/comment/numbox";
+import numbox from "@/components/numbox";
 
 export default {
   data() {

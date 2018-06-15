@@ -13,7 +13,7 @@
         </tr>
         <tr>
           <td>收货地址</td>
-          <td><strong>上海市浦东新区航头镇航都路18号-黑马程序员</strong></td>
+          <td><strong>上海市浦东新区xxxxxx</strong></td>
         </tr>
       </table>
     </div>
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import numbox from "@/components/comment/numbox"
+import numbox from "@/components/numbox"
 export default {
   data () {
     return {
